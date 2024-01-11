@@ -35,6 +35,35 @@ protected static function boot()
 ```
 No realicé esta acción porque el ejercicio no estaba claro en cuanto a cómo debería llevarse a cabo el intercambio de datos entre ambos modelos.
 
+Para una gestion de errores en la api en el  `app\Exceptions\Handler.php` aqui podemos capturar las excepciones y que retorne Json en las llamadas. 
+```php
+    public function register(): void
+    {
+        $this->reportable(function (Throwable $e) {
+            Log::error("Error:".$e->getMessage());
+            return response()->json(['message'=>$e->getMessage()],Response::HTTP_INTERNAL_SERVER_ERROR);
+        });
+        $this->reportable(function (Throwable $e) {
+            Log::error("Error:".$e->getMessage());
+            return response()->json(['message'=>$e->getMessage()],Response::HTTP_INTERNAL_SERVER_ERROR);
+        });
+        $this->renderable(function(NotFoundHttpException $e,Request $request){
+            Log::warning($e->getMessage());
+            if($request->is('api/*')){
+                return response()->json(['message'=>$e->getMessage()],Response::HTTP_NOT_FOUND);
+            }
+        });
+        $this->renderable(function(ValidationException $e,Request $request){
+            Log::warning($e->getMessage());
+            return response()->json(['message'=>$e->getMessage(),'errors'=>$e->errors()],Response::HTTP_UNPROCESSABLE_ENTITY);
+        });
+        $this->renderable(function(RequestException $e,Request $request){
+            Log::warning($e->getMessage());
+            return response()->json(['message'=>$e->getMessage()],Response::HTTP_FORBIDDEN);
+        });
+
+    }
+```
 ### Arquitectura
 
 El proyecto sigue una arquitectura basada en el patrón Modelo-Vista-Controlador (MVC) proporcionado por Laravel. La estructura de carpetas sigue las convenciones recomendadas por el framework.
@@ -60,6 +89,7 @@ Este proyecto incluye una API, se proporciona una documentación con Swagger det
 - PHP PHP 8.1 en adelante. 
 - Composer
 - Base de datos Mysql
+- Apache o Ngix
 
 ## Instalación
 
@@ -78,6 +108,7 @@ composer install
 4. En el archivo `.env`, configura las variables relacionadas con la base de datos:
 
 ```env
+APP_URL=http://localhost
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
