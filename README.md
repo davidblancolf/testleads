@@ -75,7 +75,17 @@ composer install
 ```bash
  cp .env.example .env
 ```
-4. Configura la base de datos en el archivo `.env`
+4. En el archivo `.env`, configura las variables relacionadas con la base de datos:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nombre_de_tu_base_de_datos
+DB_USERNAME=nombre_de_usuario
+DB_PASSWORD=contraseña
+```
+
 5. Genera la clave de la aplicación:
 ```bash
 php artisan key:generate
