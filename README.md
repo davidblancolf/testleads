@@ -63,13 +63,31 @@ Este proyecto incluye una API, se proporciona una documentación con Swagger det
 
 ## Instalación
 
-1. Clona el repositorio: `git clone https://github.com/tuusuario/tuproject.git`
-2. Instala las dependencias de PHP: `composer install`
-3. Copia el archivo de configuración: `cp .env.example .env`
+1. Clona el repositorio: 
+```bash
+git clone https://github.com/davidblancolf/testleads
+```
+2. Instala las dependencias de PHP: 
+```bash
+composer install
+```
+3. Copia el archivo de configuración:
+```bash
+ cp .env.example .env
+```
 4. Configura la base de datos en el archivo `.env`
-5. Genera la clave de la aplicación: `php artisan key:generate`
-6. Genera la Documentación Api SWAGGER: `php artisan l5-swagger:generate`
-7. Ejecuta las migraciones de la base de datos y seeders: `php artisan migrate:fresh --seed`
+5. Genera la clave de la aplicación:
+```bash
+php artisan key:generate
+```
+6. Genera la Documentación Api SWAGGER: 
+```bash
+php artisan l5-swagger:generate
+```
+7. Ejecuta las migraciones de la base de datos y seeders:
+```bash 
+php artisan migrate:fresh --seed
+```
 
 ## Ejecución de Pruebas
 
