@@ -11,12 +11,18 @@ En este API Rest, hemos aplicado clean code y algunos principios SOLID. Hemos se
 
 Para guardar los datos si no existe en la tabla clients el leed se puede aplicar varias soluciones al respeto y no lo realizaria en el controlador si no en el modelo lead. 
 Podemos crear Eventos en el model:
+```php
+<?php
 protected $dispatchesEvents = [
         'created' => 'App\Events\EjemploModelCreated',
         'updated' => 'App\Events\EjemploModelUpdated',
         'deleted' => 'App\Events\EjemploModelDeleted',
     ];
-Tambien hay otra forma de realizar esta acción y es utilizando esta funcion en el model: 
+?>
+```
+Tambien hay otra forma de realizar esta acción y es utilizando esta funcion en el model:
+```php
+<?php
 protected static function boot()
     {
         parent::boot();
@@ -25,6 +31,8 @@ protected static function boot()
             event(new EjemploModelCreated($model));
         });
     }
+?>
+```
 No realicé esta acción porque el ejercicio no estaba claro en cuanto a cómo debería llevarse a cabo el intercambio de datos entre ambos modelos.
 
 ### Arquitectura
