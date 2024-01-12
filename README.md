@@ -35,7 +35,7 @@ protected static function boot()
 ```
 No realicé esta acción porque el ejercicio no estaba claro en cuanto a cómo debería llevarse a cabo el intercambio de datos entre ambos modelos.
 
-Para una gestion de errores en la api en el  `app\Exceptions\Handler.php` aqui podemos capturar las excepciones y que retorne Json en las llamadas. 
+Para una gestion de errores en la api he aplicado una captura de excepciones  en el fichero `app\Exceptions\Handler.php` ademas de retornar en formato json la excepción tambien la regitro en log de laravel para asi tener un control de lo errores que estan ocurriendo en el sistema. 
 ```php
     public function register(): void
     {
@@ -64,13 +64,15 @@ Para una gestion de errores en la api en el  `app\Exceptions\Handler.php` aqui p
 
     }
 ```
+Con respeto a los test unitarios he realizado unos test muy basicos que consiste en controlar los codigos de respuestas de las peticiones al api, no se realiza vereficaciones de lo que retorna y tampoco he aplicado test casuisticas de validación en los metodos de crear y editar. 
+
 ### Arquitectura
 
 El proyecto sigue una arquitectura basada en el patrón Modelo-Vista-Controlador (MVC) proporcionado por Laravel. La estructura de carpetas sigue las convenciones recomendadas por el framework.
 
 ### Base de Datos
 
-Hemos utilizado [motor de base de datos] como base de datos para almacenar [tipo de datos]. La estructura de la base de datos se encuentra en el directorio `database/migrations`. con  la creación de 2 tablas leads y clients, en estos modelos he aplicado uuid a las claves primarias, para api rest es recomendable por temas de cambios de base de datos y seguridad. 
+He utilizado [motor de base de datos] como base de datos para almacenar [tipo de datos]. La estructura de la base de datos se encuentra en el directorio `database/migrations`. con  la creación de 2 tablas leads y clients, en estos modelos he aplicado uuid a las claves primarias, para api rest es recomendable por temas de cambios de base de datos y seguridad. 
 
 ### Seguridad
 
